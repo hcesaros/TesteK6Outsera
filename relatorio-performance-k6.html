@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Teste de Carga - K6</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 40px; }
+        .container { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #2c3e50; color: white; }
+        .success { color: green; }
+        .fail { color: red; }
+        .resumo { background-color: #ecf0f1; padding: 15px; border-radius: 8px; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Relatório de Teste de Carga com K6</h1>
+
+        <div class="resumo">
+            <h2>Resumo</h2>
+            <p><strong>URL testada:</strong> https://jsonplaceholder.typicode.com/posts</p>
+            <p><strong>Usuários Simultâneos:</strong> 500</p>
+            <p><strong>Duração:</strong> 5 minutos</p>
+            <p><strong>Requisições totais:</strong> 150.000+</p>
+        </div>
+
+        <h2>Resumo das Métricas</h2>
+        <table>
+            <tr><th>Métrica</th><th>Valor</th><th>Status</th></tr>
+            <tr><td>Requisições HTTP</td><td>195.743 (652 req/s)</td><td class="success">✓</td></tr>
+            <tr><td>Checks Totais</td><td>391.486</td><td>-</td></tr>
+            <tr><td>Checks com sucesso</td><td>61.49%</td><td class="fail">✗</td></tr>
+            <tr><td>Checks com falha</td><td>38.50%</td><td class="fail">✗</td></tr>
+            <tr><td>Falhas HTTP</td><td>0.08%</td><td class="success">✓</td></tr>
+            <tr><td>Tempo médio de resposta</td><td>673.83ms</td><td class="fail">✗</td></tr>
+            <tr><td>p95 http_req_duration</td><td>1.09s</td><td class="fail">✗</td></tr>
+            <tr><td>Checks “status is 200”</td><td>99%</td><td class="success">✓</td></tr>
+            <tr><td>Checks “response time < 500ms”</td><td>23%</td><td class="fail">✗</td></tr>
+            <tr><td>Dados Recebidos</td><td>5.5 GB</td><td>-</td></tr>
+            <tr><td>Dados Enviados</td><td>28 MB</td><td>-</td></tr>
+        </table>
+
+        <h2>Análise Final</h2>
+        <p>O teste de carga simulando 500 usuários por 5 minutos evidenciou que, embora a aplicação suporte grande volume de requisições com baixo índice de falhas HTTP (0.08%) e com taxa de sucesso de status 200 em 99% das respostas, o desempenho relacionado ao tempo de resposta precisa ser otimizado.</p>
+
+        <p>O tempo médio de resposta ficou em <strong>673ms</strong>, e o percentil 95 (p95) ultrapassou <strong>1 segundo</strong>, descumprindo o SLA estipulado de 500ms. Apenas 23% das respostas ficaram abaixo desse limite, o que evidencia gargalos de desempenho sob carga pesada.</p>
+
+        <h2>Recomendações</h2>
+        <ul>
+            <li>Realizar análise de performance do backend e otimização de endpoints mais utilizados.</li>
+            <li>Adicionar mecanismos de cache para respostas estáticas ou pouco mutáveis.</li>
+            <li>Escalar horizontalmente os serviços e/ou aumentar recursos de infraestrutura.</li>
+            <li>Implementar monitoramento em tempo real para identificar picos e suas causas.</li>
+            <li>Executar novos testes progressivos com limiares intermediários (100, 300, 700 usuários).</li>
+        </ul>
+    </div>
+</body>
+</html>
