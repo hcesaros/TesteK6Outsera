@@ -25,6 +25,8 @@ GET https://jsonplaceholder.typicode.com/posts
 
 ├── resultados/ # Pasta para armazenar os relatórios (opcional)
 
+├── relatorio-performance-k6.html # arquivo html com as execucoes do teste
+
 └── README.md # Documentação do projeto
 
 ---
